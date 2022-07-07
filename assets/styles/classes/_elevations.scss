@@ -1,0 +1,17 @@
+@import '../variables/colors';
+@import '../variables/elevations';
+@import '../functions/elevations';
+
+@each $key, $elevation in $elevations {
+  .elevation-#{$key} {
+    box-shadow: elevation($key);
+  }
+
+  @each $name, $color in $colors {
+    @if $name != greyscale {
+      .elevation-#{$key}-#{$name} {
+        box-shadow: elevation($key, $name);
+      }
+    }
+  }
+}

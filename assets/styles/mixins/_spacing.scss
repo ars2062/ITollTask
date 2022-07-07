@@ -1,0 +1,76 @@
+@import '../variables/breakpoints';
+@import '../mixins/break';
+@import '../variables/spacing';
+
+@mixin generate-spacing($name, $index, $space, $property) {
+  @each $key, $value in $sides {
+    @if type-of($value) == 'map' {
+      .#{$name}#{$key}-#{$index} {
+        @each $inner-key, $inner-value in $value {
+          #{$property}-#{$inner-value}: #{$space} !important;
+        }
+      }
+    } @else {
+      .#{$name}#{$key}-#{$index} {
+        #{$property}-#{$value}: #{$space} !important;
+      }
+    }
+  }
+
+  @if $space != 0 {
+    @each $key, $value in $sides {
+      @if type-of($value) == 'map' {
+        .#{$name}#{$key}-n#{$index} {
+          @each $inner-key, $inner-value in $value {
+            #{$property}-#{$inner-value}: -#{$space} !important;
+          }
+        }
+      } @else {
+        .#{$name}#{$key}-n#{$index} {
+          #{$property}-#{$value}: -#{$space} !important;
+        }
+      }
+    }
+  }
+
+  @each $breakpoint, $breakpoint-value in $breakpoints {
+    @each $key, $value in $sides {
+      @if type-of($value) == 'map' {
+        .#{$name}#{$key}-#{$breakpoint}-#{$index} {
+          @include break($breakpoint) {
+            @each $inner-key, $inner-value in $value {
+              #{$property}-#{$inner-value}: #{$space} !important;
+            }
+          }
+        }
+      } @else {
+        .#{$name}#{$key}-#{$breakpoint}-#{$index} {
+          @include break($breakpoint) {
+            #{$property}-#{$value}: #{$space} !important;
+          }
+        }
+      }
+    }
+
+    @if $space != 0 {
+      @each $key, $value in $sides {
+        @if type-of($value) == 'map' {
+          .#{$name}#{$key}-#{$breakpoint}-n#{$index} {
+            @include break($breakpoint) {
+              /* stylelint-disable */
+              @each $inner-key, $inner-value in $value {
+                #{$property}-#{$inner-value}: -#{$space} !important;
+              }
+            }
+          }
+        } @else {
+          .#{$name}#{$key}-#{$breakpoint}-n#{$index} {
+            @include break($breakpoint) {
+              #{$property}-#{$value}: -#{$space} !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

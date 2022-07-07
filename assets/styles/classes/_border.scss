@@ -1,0 +1,19 @@
+@import '../variables/border';
+@import '../variables/breakpoints';
+@import '../functions/border';
+@import '../mixins/break';
+
+@each $key, $size in $borders {
+  .rounded-#{$key} {
+    border-radius: #{$size};
+  }
+}
+@each $key, $value in $breakpoints {
+  @each $borderKey, $borderSize in $borders {
+    .rounded-#{$key}-#{$borderKey} {
+      @include break(#{$key}) {
+        border-radius: #{$borderSize};
+      }
+    }
+  }
+}

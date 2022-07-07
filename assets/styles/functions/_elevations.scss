@@ -1,0 +1,14 @@
+@import '../functions/colors';
+@import '../variables/colors';
+@import '../variables/elevations';
+
+@function elevation($key, $color: '') {
+  $elevation: map-get($elevations, $key);
+  $pos: map-get($elevation, 'pos');
+  $opacity: map-get($elevation, 'opacity');
+  @if $color != '' {
+    @return #{$pos} rgba(color($color), $opacity);
+  } @else {
+    @return #{$pos} rgba(#000, $opacity);
+  }
+}

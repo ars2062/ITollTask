@@ -1,0 +1,36 @@
+@import '../functions/colors';
+@import '../variables/colors';
+
+@each $key, $weights in $colors {
+  @each $weight, $color in $weights {
+    $class: #{$key};
+
+    @if $weight != 500 {
+      $class: #{$class}-#{$weight};
+    }
+    .#{$class} {
+      background-color: #{color($key, $weight)} !important;
+    }
+    .#{$class}-text {
+      color: #{color($key, $weight)} !important;
+    }
+    .#{$class}-border {
+      border-color: #{color($key, $weight)} !important;
+    }
+    .#{$class}-border-top {
+      border-top-color: #{color($key, $weight)} !important;
+    }
+    .#{$class}-border-right {
+      border-right-color: #{color($key, $weight)} !important;
+    }
+    .#{$class}-border-bottom {
+      border-bottom-color: #{color($key, $weight)} !important;
+    }
+    .#{$class}-border-left {
+      border-left-color: #{color($key, $weight)} !important;
+    }
+    .#{$class}-fill {
+      fill: #{color($key, $weight)} !important;
+    }
+  }
+}

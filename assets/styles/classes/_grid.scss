@@ -1,0 +1,85 @@
+@import '../variables/variables';
+@import '../variables/breakpoints';
+@import '../mixins/break';
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.align-start {
+  align-items: flex-start;
+}
+
+.align-center {
+  justify-items: center;
+}
+@for $i from 1 through $cols {
+  .col-#{$i} {
+    flex: 0 0 calc(100% / #{$cols} * #{$i});
+    max-width: calc(100% / #{$cols} * #{$i});
+  }
+}
+@each $key, $value in $breakpoints {
+  @for $i from 1 through $cols {
+    .col-#{$key}-#{$i} {
+      @include break(#{$key}) {
+        flex: 0 0 calc(100% / #{$cols} * #{$i});
+        max-width: calc(100% / #{$cols} * #{$i});
+      }
+    }
+  }
+}
+@for $i from 1 through ($cols - 1) {
+  .offset-#{$i} {
+    margin-right: calc(100% / #{$cols} * #{$i});
+  }
+}
+@each $key, $value in $breakpoints {
+  @for $i from 0 through ($cols - 1) {
+    .offset-#{$key}-#{$i} {
+      @include break(#{$key}) {
+        margin-right: calc(100% / #{$cols} * #{$i});
+      }
+    }
+  }
+}
+$order-start: map-get($order, 'start');
+$order-end: map-get($order, 'end');
+@for $i from $order-start through ($order-end + 1) {
+  .order-#{$i} {
+    order: #{$i};
+  }
+}
+@each $key, $value in $breakpoints {
+  @for $i from $order-start through ($order-end + 1) {
+    .order-#{$key}-#{$i} {
+      @include break(#{$key}) {
+        order: #{$i};
+      }
+    }
+  }
+}

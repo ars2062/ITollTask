@@ -1,0 +1,11 @@
+@import '../variables/colors';
+
+@function color($name, $weight: 500) {
+  $c: map-get($colors, $name);
+
+  @if $c {
+    @return map-get($c, $weight);
+  } @else {
+    @return $name;
+  }
+}
