@@ -29,11 +29,19 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
+    '@nuxtjs/style-resources',
+    'nuxt-purgecss',
   ],
+
+  styleResources: {
+    scss: ['./assets/styles/app.scss'],
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    extractCSS: true,
+  },
 }

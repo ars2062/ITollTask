@@ -1,0 +1,7 @@
+@import '../variables/spacing';
+@function hexToRGB($hex) {
+  @return red($hex), green($hex), blue($hex);
+}
+@function spacing($key) {
+  @return map-get($spacing, $key);
+}

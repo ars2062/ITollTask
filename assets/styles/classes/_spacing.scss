@@ -1,0 +1,7 @@
+@import '../variables/spacing';
+@import '../mixins/spacing';
+
+@each $key, $value in $spacing {
+  @include generate-spacing('p', $key, $value, 'padding');
+  @include generate-spacing('m', $key, $value, 'margin');
+}

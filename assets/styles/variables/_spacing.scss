@@ -1,0 +1,41 @@
+$spacing: (
+  0: 0,
+  1: 4px,
+  2: 8px,
+  3: 12px,
+  4: 16px,
+  5: 20px,
+  6: 24px,
+  7: 32px,
+  8: 40px,
+  9: 48px,
+  10: 56px,
+  11: 64px,
+  12: 80px,
+  13: 96px,
+  14: 120px,
+  15: 136px,
+  16: 160px,
+  17: 200px,
+  18: 240px,
+);
+$sides: (
+  t: 'top',
+  b: 'bottom',
+  r: 'right',
+  l: 'left',
+  x: (
+    0: 'left',
+    1: 'right',
+  ),
+  y: (
+    0: 'top',
+    1: 'bottom',
+  ),
+  a: (
+    0: 'top',
+    1: 'bottom',
+    2: 'left',
+    3: 'right',
+  ),
+);
