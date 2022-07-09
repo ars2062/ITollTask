@@ -1,7 +1,7 @@
 <template>
-  <div :class="classes" :style="computedStyles">
+  <component :is="tag" :class="classes" :style="computedStyles">
     <slot />
-  </div>
+  </component>
 </template>
 
 <script lang="ts">
@@ -40,6 +40,10 @@ export default mixins(Colorable, Sizable).extend({
     sticky: {
       type: Boolean,
       default: false,
+    },
+    tag: {
+      type: String,
+      default: 'div',
     },
   },
   computed: {
