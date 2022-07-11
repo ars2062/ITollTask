@@ -58,11 +58,10 @@ export default Vue.extend({
   grid-template-columns: repeat(3, 1fr) #{$image-width};
   @include break-df(md) {
     grid-template-areas:
-      'title image'
-      'description description'
-      'tags tags'
-      'created updated';
-    grid-template-columns: 1fr #{$image-width};
+      'title title title image'
+      'description description description image'
+      'tags tags tags tags'
+      'created created updated updated';
   }
   img {
     grid-area: image;
