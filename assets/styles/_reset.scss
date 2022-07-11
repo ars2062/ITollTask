@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -6,8 +8,7 @@
   vertical-align: baseline;
   box-sizing: border-box;
   word-break: inherit;
-  font-family: dana, tahoma;
-
+  font-family: 'Roboto', sans-serif;
   ::-webkit-scrollbar {
     width: 3px;
     height: 7px;

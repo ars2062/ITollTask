@@ -1,6 +1,9 @@
 <template>
   <div id="layout">
     <app-header />
+    <main>
+      <Nuxt />
+    </main>
   </div>
 </template>
 

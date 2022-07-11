@@ -42,6 +42,9 @@ export const actions: ActionTree<TArticlesState, TArticlesState> = {
       .then((res) => {
         commit('SET', { ...res })
       })
+      .catch((e) => {
+        console.error(e)
+      })
       .finally(() => {
         commit('SET', { loading: false })
       })

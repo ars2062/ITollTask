@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" :class="classes" :style="computedStyles">
+  <component :is="tag" :class="classes" :style="computedStyles" v-bind="$attrs">
     <slot />
   </component>
 </template>
