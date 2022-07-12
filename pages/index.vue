@@ -28,6 +28,9 @@ export default Vue.extend({
   },
   mounted() {
     this.$store.dispatch('articles/fetchArticles')
+    if (this.$route.query.openAuth) {
+      this.$store.commit('app/SET', { authDialog: true })
+    }
   },
 })
 </script>
