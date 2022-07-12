@@ -1,0 +1,12 @@
+@mixin hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@mixin size($width, $height: $width){
+  width: #{$width};
+  height: #{$height};
+}

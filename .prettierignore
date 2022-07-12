@@ -94,3 +94,9 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# css framework
+assets/styles/
+
+# modules
+modules

@@ -1,0 +1,22 @@
+@import '../variables/breakpoints';
+@import '../mixins/break';
+@import '../functions/hex';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+
+  @each $key, $value in $breakpoints {
+    @include break($key) {
+      @if index($fluid-breakpoints, $key) {
+        max-width: auto;
+        padding: spacing(4);
+      } @else {
+        max-width: #{$value};
+        padding: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+@use './colors';
+
+:export {
+  @each $color, $weights in $colors {
+    @each $weight, $weightedColor in $weights {
+      @if $weight == 500 {
+        #{unquote($color)}: $weightedColor;
+      } @else {
+        #{unquote($color)}-#{$weight}: $weightedColor;
+      }
+    }
+  }
+}

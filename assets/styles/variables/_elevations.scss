@@ -1,0 +1,42 @@
+$elevations: (
+  xs: (
+    pos: '0px 2px 4px',
+    opacity: 0.08,
+  ),
+  sm: (
+    pos: '0px 4px 8px',
+    opacity: 0.08,
+  ),
+  md: (
+    pos: '0px 8px 16px',
+    opacity: 0.08,
+  ),
+  lg: (
+    pos: '0px 12px 24px',
+    opacity: 0.12,
+  ),
+  xl: (
+    pos: '0px 16px 40px',
+    opacity: 0.16,
+  ),
+  txs: (
+    pos: '0px -2px 4px',
+    opacity: 0.08,
+  ),
+  tsm: (
+    pos: '0px -4px 8px',
+    opacity: 0.08,
+  ),
+  tmd: (
+    pos: '0px -8px 16px',
+    opacity: 0.08,
+  ),
+  tlg: (
+    pos: '0px -12px 24px',
+    opacity: 0.12,
+  ),
+  txl: (
+    pos: '0px -16px 40px',
+    opacity: 0.16,
+  ),
+);
