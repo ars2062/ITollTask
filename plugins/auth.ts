@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { Context, Plugin } from '@nuxt/types'
-import { LOGIN_USER, USER } from '@/endpoints/auth'
+import { LOGIN_USER, UPDATE_USER, USER } from '@/endpoints/auth'
 export type TUser = {
   email: string
   username: string
@@ -60,8 +60,9 @@ class Auth {
 
   getUser() {
     return this.$axios
-      .post(USER())
+      .$get(UPDATE_USER())
       .then((res) => {
+        this.user = res.user
         return res
       })
       .catch((e) => {
@@ -70,9 +71,11 @@ class Auth {
       })
   }
 
-  updateUser(email) {
+  updateUser(user: TUser) {
+    console.log(user)
+
     return this.$axios
-      .put(USER(), { user: { email } })
+      .put(UPDATE_USER(), { user })
       .then((res) => {
         return res
       })

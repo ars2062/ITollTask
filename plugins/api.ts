@@ -5,7 +5,7 @@ import axios, {
   AxiosStatic,
 } from 'axios'
 import Vue from 'vue'
-import { Plugin } from '@nuxt/types'
+import { Context, Plugin } from '@nuxt/types'
 
 export interface IAxiosInstance extends AxiosInstance {
   $request: <T = any, R = AxiosResponse<T>['data'], D = any>(
@@ -44,38 +44,45 @@ export interface IAxiosInstance extends AxiosInstance {
   ) => Promise<R>
   isCancel: AxiosStatic['isCancel']
 }
+function createAxios(ctx: Context) {
+  const instance = axios.create({
+    baseURL: 'https://api.realworld.io/api',
+    headers: {
+      'provider-code': 'deltaban',
+      accept: 'application/json, text/plain, */*',
+      withCredentials: 'true',
+      'Content-Type': 'application/json',
+    },
+  }) as IAxiosInstance
 
-export const instance = axios.create({
-  baseURL: 'https://api.realworld.io/api',
-  headers: {
-    'provider-code': 'deltaban',
-    accept: 'application/json, text/plain, */*',
-    withCredentials: 'true',
-    'Content-Type': 'application/json',
-  },
-}) as IAxiosInstance
+  instance.interceptors.request.use((config) => {
+    if (ctx.$auth.loggedIn && config.headers)
+      config.headers.Authorization = `Token ${ctx.$auth.user?.token}`
+    return config
+  })
 
-const axiosExtra = {}
-for (const method of [
-  'request',
-  'delete',
-  'get',
-  'head',
-  'options',
-  'post',
-  'put',
-  'patch',
-]) {
-  axiosExtra['$' + method] = function (...args) {
-    return this[method](...args).then((res) => res && res.data)
+  const axiosExtra = {}
+  for (const method of [
+    'request',
+    'delete',
+    'get',
+    'head',
+    'options',
+    'post',
+    'put',
+    'patch',
+  ]) {
+    axiosExtra['$' + method] = function (...args) {
+      return this[method](...args).then((res) => res && res.data)
+    }
   }
-}
-for (const key in axiosExtra) {
-  instance[key] = axiosExtra[key].bind(instance)
-}
+  for (const key in axiosExtra) {
+    instance[key] = axiosExtra[key].bind(instance)
+  }
 
-instance.isCancel = axios.isCancel.bind(instance)
-
+  instance.isCancel = axios.isCancel.bind(instance)
+  return instance
+}
 declare module '@nuxt/types' {
   interface Context {
     $axios: IAxiosInstance
@@ -96,7 +103,7 @@ declare module 'vuex/types/index' {
 }
 
 const plugin: Plugin = function (ctx, inject) {
-  const observableInstance = Vue.observable(instance)
+  const observableInstance = Vue.observable(createAxios(ctx))
   inject('axios', observableInstance)
   ctx.$axios = observableInstance
 }
