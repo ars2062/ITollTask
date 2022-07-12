@@ -11,7 +11,7 @@
             <nuxt-link to="/profile">{{ $auth.user.username }}</nuxt-link>
             <nuxt-link
               class="secondary neutral-200-text"
-              to="/profile/new-article"
+              to="/profile/newarticle"
             >
               New Article
             </nuxt-link>
