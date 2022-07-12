@@ -3,7 +3,7 @@
     <g-card class="user">
       <h2>Profile:</h2>
       <span v-if="!flags.edit" @click="edit">Edit</span>
-      <v-form class="user__form">
+      <v-form ref="form" class="user__form">
         <v-text-field v-model="form.username" v-bind="attrs" label="username" />
         <v-text-field v-model="form.email" v-bind="attrs" label="email" />
         <v-text-field
@@ -12,12 +12,7 @@
           label="new password"
           type="password"
         />
-        <v-text-field
-          v-model="form.image"
-          v-bind="attrs"
-          label="image"
-          type="file"
-        />
+        <v-text-field v-bind="attrs" label="image" type="file" />
         <v-textarea v-model="form.bio" v-bind="attrs" label="bio" />
       </v-form>
       <v-btn
@@ -31,9 +26,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import GCard from '@/components/ui/GCard.vue'
-export default {
+import { TUser } from '~/plugins/auth'
+export default Vue.extend({
   components: { GCard },
   layout: 'profile',
   data() {
@@ -55,9 +52,11 @@ export default {
       this.attrs.disabled = false
     },
     submit() {
+      if (!(this.$refs.form as Vue & { validate: () => boolean })?.validate())
+        return
       this.flags.loading = true
       this.$auth
-        .updateUser(this.form)
+        .updateUser(this.form as TUser)
         .then(() => {
           this.flags.edit = false
           this.attrs.disabled = true
@@ -68,7 +67,7 @@ export default {
         })
     },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

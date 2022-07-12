@@ -1,12 +1,17 @@
 <template>
   <g-card :loading="flags.loading" class="pa-4" radius="3">
-    <v-form @submit.prevent="register">
+    <v-form ref="form" lazy-validation @submit.prevent="register">
       <h2 class="mb-4">Sign Up</h2>
       <v-alert v-if="error" type="error"
         ><div class="ml-2">{{ error }}</div></v-alert
       >
       <v-text-field v-bind="attrs" v-model="form.username" label="username" />
-      <v-text-field v-bind="attrs" v-model="form.email" label="email" />
+      <v-text-field
+        v-bind="attrs"
+        v-model="form.email"
+        :rules="[required, email]"
+        label="email"
+      />
       <v-text-field
         v-bind="attrs"
         v-model="form.password"
@@ -34,6 +39,7 @@
 import Vue from 'vue'
 import { VTextField, VBtn, VForm, VAlert } from 'vuetify/lib'
 import GCard from '../ui/GCard.vue'
+import { required, email } from '@/utils/rules'
 
 export default Vue.extend({
   components: {
@@ -63,15 +69,20 @@ export default Vue.extend({
       attrs: {
         outlined: true,
         required: true,
+        rules: [required],
       },
       error: '',
     }
   },
   methods: {
+    email,
+    required,
     goToLogin() {
       this.$store.commit('app/SET', { authDialogState: 'LOGIN' })
     },
     register() {
+      if (!(this.$refs.form as Vue & { validate: () => boolean })?.validate())
+        return
       this.flags.loading = true
       this.$auth
         .register(this.form.email, this.form.username, this.form.password)

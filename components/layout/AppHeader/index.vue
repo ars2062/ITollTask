@@ -60,11 +60,16 @@ export default Vue.extend({
     display: flex;
     align-items: center;
     gap: spacing(3);
+    &__link {
+      color: inherit;
+    }
   }
 
   &__actions {
     a,
     button {
+      color: inherit;
+      text-decoration: none;
       display: block;
       height: 40px;
       line-height: 40px;

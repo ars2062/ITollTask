@@ -1,6 +1,6 @@
 <template>
   <div class="container my-4">
-    <v-form @submit.prevent="submit">
+    <v-form ref="form" @submit.prevent="submit">
       <g-card class="pa-4" :loading="flags.loading">
         <h1 class="mb-2">New Article</h1>
         <v-text-field v-bind="attrs" v-model="form.title" label="title" />
@@ -34,6 +34,8 @@
 import Vue from 'vue'
 import GCard from '~/components/ui/GCard.vue'
 import { CREATE_ARTICLE, GET_TAGS } from '~/endpoints/article'
+import { required } from '@/utils/rules'
+
 export default Vue.extend({
   components: { GCard },
   layout: 'profile',
@@ -42,12 +44,13 @@ export default Vue.extend({
       attrs: {
         outlined: true,
         disabled: true,
+        rules: [required],
       },
       form: {
-        title: 'How to train your dragon',
-        description: 'Ever wonder how?',
-        body: 'Very carefully.',
-        tagList: ['training', 'dragons'],
+        title: '',
+        description: '',
+        body: '',
+        tagList: [] as string[],
       },
       flags: {
         loading: false,
@@ -78,6 +81,8 @@ export default Vue.extend({
       this.search = ''
     },
     submit() {
+      if (!(this.$refs.form as Vue & { validate: () => boolean })?.validate())
+        return
       this.flags.loading = true
       this.$axios
         .$post(CREATE_ARTICLE(), {
