@@ -1,5 +1,6 @@
 <template>
   <component :is="tag" :class="classes" :style="computedStyles" v-bind="$attrs">
+    <porgress-linear v-if="loading" class="card__loading" color="primary" />
     <slot />
   </component>
 </template>
@@ -7,11 +8,13 @@
 <script lang="ts">
 import { PropType } from 'vue'
 import mixins from 'vue-typed-mixins'
+import PorgressLinear from './PorgressLinear.vue'
 import Colorable from '@/mixins/colorable'
 import Sizable, { makeSizableStyle, cssUnit } from '@/mixins/sizable'
 import { TColorWithWeight, TElevation, TRadius } from '~/types/DesignSystem'
 
 export default mixins(Colorable, Sizable).extend({
+  components: { PorgressLinear },
   props: {
     disabled: {
       type: Boolean,
