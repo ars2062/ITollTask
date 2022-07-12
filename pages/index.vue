@@ -1,6 +1,8 @@
 <template>
   <div class="container list">
-    <template v-if="loading">loading</template>
+    <template v-if="loading">
+      <porgress-linear color="secondary" />
+    </template>
     <template v-else>
       <article-card
         v-for="(article, index) in articles"
@@ -15,10 +17,12 @@
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import ArticleCard from '@/components/ArticleCard/index.vue'
+import PorgressLinear from '~/components/ui/PorgressLinear.vue'
 export default Vue.extend({
   name: 'IndexPage',
   components: {
     ArticleCard,
+    PorgressLinear,
   },
   computed: {
     ...mapGetters({
