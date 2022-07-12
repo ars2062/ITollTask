@@ -18,7 +18,7 @@ export default {
   css: ['./assets/styles/_reset.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/api.ts', '@/plugins/dayjs.ts'],
+  plugins: ['@/plugins/dayjs.ts', '@/plugins/api.ts', '@/plugins/auth.ts'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,
@@ -31,6 +31,14 @@ export default {
     '@nuxtjs/stylelint-module',
     '@nuxtjs/style-resources',
     'nuxt-purgecss',
+    [
+      '@nuxtjs/vuetify',
+      {
+        treeShake: {
+          components: ['VDialog', 'VTextField', 'VInput'],
+        },
+      },
+    ],
   ],
 
   styleResources: {
@@ -38,7 +46,7 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ['@/modules/storage/index.ts'],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
