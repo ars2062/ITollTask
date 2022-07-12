@@ -60,12 +60,16 @@ export default Vue.extend({
     'created updated . image';
   $image-width: 80px;
   grid-template-columns: repeat(3, 1fr) #{$image-width};
+  cursor: pointer;
   @include break-df(md) {
     grid-template-areas:
       'title title title image'
       'description description description image'
       'tags tags tags tags'
       'created created updated updated';
+  }
+  * {
+    pointer-events: none;
   }
   img {
     grid-area: image;

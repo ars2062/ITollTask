@@ -1,5 +1,5 @@
 <template>
-  <g-card tag="header" color="neutral-100" elevation="lg" height="64" sticky>
+  <g-card tag="header" color="neutral-100" elevation="lg" height="64">
     <div class="container">
       <div class="header">
         <div class="header__links">

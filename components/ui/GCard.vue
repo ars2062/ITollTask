@@ -64,7 +64,7 @@ export default mixins(Colorable, Sizable).extend({
       return {
         ...makeSizableStyle(this.$props),
         position: this.sticky ? 'sticky' : undefined,
-        top: this.sticky ? '0' : undefined,
+        top: this.sticky ? '16px' : undefined,
         '--border-width': cssUnit(this.borderWidth),
       }
     },
