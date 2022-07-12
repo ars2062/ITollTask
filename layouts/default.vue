@@ -1,5 +1,6 @@
 <template>
-  <div id="layout">
+  <div id="app" data-app>
+    <login-dialog />
     <app-header />
     <main>
       <Nuxt />
@@ -9,9 +10,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import AppHeader from '~/components/layout/AppHeader/index.vue'
-
+import AppHeader from '@/components/layout/AppHeader/index.vue'
+import LoginDialog from '~/components/Auth/AuthDialog.vue'
 export default defineComponent({
-  components: { AppHeader },
+  components: { AppHeader, LoginDialog },
 })
 </script>

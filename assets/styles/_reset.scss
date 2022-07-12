@@ -87,3 +87,12 @@ body {
   height: 100%;
   scroll-behavior: smooth;
 }
+
+.v-input__slot{
+  fieldset{
+    padding: inherit;
+  }
+}
+.v-dialog {
+  box-shadow: none;
+}

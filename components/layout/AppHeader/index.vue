@@ -4,16 +4,29 @@
       <div class="header">
         <div class="header__links">
           <nuxt-link class="header__links__link" to="/">Home</nuxt-link>
-          <nuxt-link class="header__links__link" to="/">Profile</nuxt-link>
         </div>
 
         <div class="header__actions">
-          <nuxt-link class="secondary neutral-200-text" to="/"
-            >New Article</nuxt-link
-          >
-          <nuxt-link class="error-border neutral-900-text" to="/"
-            >Logout</nuxt-link
-          >
+          <template v-if="$auth.user">
+            <nuxt-link to="/profile">{{ $auth.user.username }}</nuxt-link>
+            <nuxt-link
+              class="secondary neutral-200-text"
+              to="/profile/new-article"
+            >
+              New Article
+            </nuxt-link>
+            <button
+              class="error-border neutral-900-text"
+              @click="$auth.logout()"
+            >
+              Logout
+            </button>
+          </template>
+          <template v-else>
+            <button class="secondary-border secondary-text" @click="openAuth">
+              SingUp/SignIn
+            </button>
+          </template>
         </div>
       </div>
     </div>
@@ -21,12 +34,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import Vue from 'vue'
 import GCard from '../../ui/GCard.vue'
 
-export default defineComponent({
+export default Vue.extend({
   name: 'AppHeader',
   components: { GCard },
+  methods: {
+    openAuth() {
+      this.$store.commit('app/SET', { authDialog: true })
+    },
+  },
 })
 </script>
 
@@ -45,7 +63,8 @@ export default defineComponent({
   }
 
   &__actions {
-    a {
+    a,
+    button {
       display: block;
       height: 40px;
       line-height: 40px;

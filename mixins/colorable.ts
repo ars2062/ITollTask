@@ -10,7 +10,7 @@ export default Vue.extend({
   props: {
     color: {
       type: String as PropType<TColorWithWeight>,
-      default: 'primary',
+      default: 'neutral-100',
     },
   },
 })

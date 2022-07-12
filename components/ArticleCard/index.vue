@@ -15,12 +15,8 @@
         {{ tag }}
       </li>
     </ul>
-    <time :datetime="article.createdAt"
-      >Created {{ $dayjs(article.createdAt).fromNow() }}</time
-    >
-    <time :datetime="article.updatedAt"
-      >Updated {{ $dayjs(article.updatedAt).fromNow() }}</time
-    >
+    <time :datetime="article.createdAt">Created {{ createdAt }}</time>
+    <time :datetime="article.updatedAt">Updated {{ updatedAt }}</time>
   </g-card>
 </template>
 
@@ -37,6 +33,14 @@ export default Vue.extend({
     article: {
       type: Object as PropType<IArticle>,
       required: true,
+    },
+  },
+  computed: {
+    createdAt() {
+      return this.$dayjs && this.$dayjs(this.article.createdAt).fromNow()
+    },
+    updatedAt() {
+      return this.$dayjs && this.$dayjs(this.article.updatedAt).fromNow()
     },
   },
 })
