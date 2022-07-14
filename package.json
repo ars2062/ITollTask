@@ -25,7 +25,7 @@
     "dayjs": "1.11.3",
     "nuxt": "2.15.8",
     "vue": "2.7.3",
-    "vue-server-renderer": "2.7.3",
+    "vue-server-renderer": "2.7.5",
     "vue-template-compiler": "2.7.3",
     "vue-typed-mixins": "0.2.0",
     "webpack": "4.46.0"
