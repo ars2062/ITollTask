@@ -28,7 +28,7 @@
     "vue-server-renderer": "2.7.3",
     "vue-template-compiler": "2.7.3",
     "vue-typed-mixins": "0.2.0",
-    "webpack": "4.46.0"
+    "webpack": "5.74.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.18.2",
